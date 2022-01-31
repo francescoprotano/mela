@@ -3,6 +3,7 @@
 	<name>melaRest</name>
 	<comment></comment>
 	<projects>
+		<project>melaEJBClient</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
