@@ -4,7 +4,6 @@
 	<comment></comment>
 	<projects>
 		<project>melaEJB</project>
-		<project>melaEJBClient</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

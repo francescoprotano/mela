@@ -5,7 +5,7 @@
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="melaEJBClient.jar" deploy-path="/" handle="module:/resource/melaEJBClient/melaEJBClient">
+        <dependent-module archiveName="melaEJBClient.jar" deploy-path="/lib" handle="module:/classpath/lib/C:/Users/Exolab/Desktop/melaEJBClient.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
     </wb-module>
