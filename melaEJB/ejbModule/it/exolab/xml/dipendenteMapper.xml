@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="it.exolab.mapper.DipendenteMapper">
+    
+    <insert id="add" parameterType="it.exolab.model.Dipendente"
+    useGeneratedKeys="true"
+    keyProperty="id_dipendente"
+    keyColumn="id_dipendente" 
+   >
+    INSERT INTO dipendenti (nome, cognome, data_nascita, email, password, ruolo)
+    VALUES (#{nome}, #{cognome}, #{data_nascita}, #{email}, #{password}, #{ruolo})
+    </insert>
+    
+    
+    <select id="findAll" resultType="it.exolab.model.Dipendente">
+    SELECT * FROM dipendenti
+    </select>
+    
+    
+    
+
+    </mapper>
