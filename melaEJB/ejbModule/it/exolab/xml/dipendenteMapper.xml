@@ -10,9 +10,16 @@
     keyProperty="id_dipendente"
     keyColumn="id_dipendente" 
    >
-    INSERT INTO dipendenti (nome, cognome, data_nascita, email, password, ruolo)
-    VALUES (#{nome}, #{cognome}, #{data_nascita}, #{email}, #{password}, #{ruolo})
+    INSERT INTO dipendenti (nome, cognome, data_nascita, email, password, ruolo_fk)
+    VALUES (#{nome}, #{cognome}, #{data_nascita}, #{email}, #{password}, #{ruolo_fk})
     </insert>
+    
+    
+    <select id="findByEmailAndPassword" resultType="it.exolab.model.Dipendente">
+    SELECT id_dipendente, nome, cognome, data_nascita, email, password, ruolo_fk 
+    FROM dipendenti
+    WHERE email = #{email} AND password = #{password}
+    </select>
     
     
     <select id="findAll" resultType="it.exolab.model.Dipendente">
@@ -20,6 +27,39 @@
     </select>
     
     
+    <resultMap id="dipendenteConContrattoEPresenze" type="it.exolab.model.Dipendente">
+    	<result property="id_dipendente" column="id_dipendente"/>
+    	<result property="nome" column="nome"/>
+    	<result property="cognome" column="cognome"/>
+    	<result property="data_nascita" column="data_nascita"/>
+    	<result property="email" column="email"/>
+    	<result property="password" column="password"/>
+    	<result property="ruolo_fk" column="ruolo_fk"/>
+    		<association property="contratti" javaType="it.exolab.model.Contratto">
+    		<id property="id_contratto" column="id_contratto"/>
+    		<result property="data_assunzione" column="data_assunzione"/>
+    		<result property="data_scadenza" column="data_scadenza"/>
+    		<result property="tipologia_fk" column="tipologia_fk"/>
+    		</association>
+    			<association property="presenze" javaType="it.exolab.model.Presenza">
+    			<id property="id_presenza" column="id_presenza"/>
+    			<result property="data" column="data"/>
+    			<result property="motivazione_assenza_fk" column="motivazione_assenza_fk"/> 			
+    			</association>
+    				
+    			
+    </resultMap>
     
-
+    <select id="tuttoDelDipendente" resultMap="dipendenteConContrattoEPresenze">
+    SELECT 
+      id_dipendente, nome, cognome, data_nascita, email, password, ruolo_fk,
+      id_contratto, data_assunzione, data_scadenza, tipologia_fk, 
+      id_presenza, data, motivazione_assenza_fk
+    FROM dipendenti d
+    JOIN contratti c ON id_dipendente = c.id_dipendente_fk
+    JOIN presenze p ON id_dipendente = p.id_dipendente_fk
+    WHERE id_dipendente = #{id_dipendente}
+    </select>
+   
+   
     </mapper>

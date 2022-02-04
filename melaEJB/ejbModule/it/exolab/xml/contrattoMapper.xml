@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="it.exolab.mapper.ContrattoMapper">
+    
+    <insert id="add" parameterType="it.exolab.model.Contratto"
+    useGeneratedKeys="true"
+    keyProperty="id_contratto"
+    keyColumn="id_contratto" 
+   >
+    INSERT INTO contratti (data_assunzione, data_scadenza, tipologia_fk)
+    VALUES (#{data_assunzione}, #{data_scadenza})
+    </insert>
+    
+    
+    <select id="findAll" resultType="it.exolab.model.Contratto">
+    SELECT * FROM contratti
+    </select>
+    
+    <resultMap id="findContrattoConDipendente" type="it.exolab.model.Contratto">
+    	<result property="id_contratto" column="id_contratto"/>
+    	<result property="data_assunzione" column="data_assunzione"/>
+    		<association property="dipendenti" javaType="it.exolab.model.Dipendente">
+    		<result property="id_dipendente" column="id_dipendente"/>
+    		<result property="nome" column="nome"/>
+    		</association>
+    </resultMap>
+    
+    <select id="findContrattoById" resultMap="findContrattoConDipendente">
+    SELECT
+    id_contratto, data_assunzione,
+    id_dipendente, nome
+    FROM contratti c
+    JOIN dipendenti d ON c.id_dipendente_fk
+    </select>
+    
+
+   
+    </mapper>

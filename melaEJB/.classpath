@@ -13,12 +13,12 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/Exolab/git/repository/mela/mybatis-3.5.5.jar">
+	<classpathentry kind="lib" path="C:/Users/Exolab/git/repository/mela/mysql-connector-java-5.1.46.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="../lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Exolab/git/repository/mela/mysql-connector-java-5.1.46.jar">
+	<classpathentry kind="lib" path="C:/Users/Exolab/git/repository/mela/mybatis-3.5.5.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="../lib"/>
 		</attributes>

@@ -8,5 +8,7 @@ public interface DipendenteMapper {
 	
 	void add(Dipendente dipendente);
 	List<Dipendente> findAll();
+	Dipendente tuttoDelDipendente(String id_dipendente);
+	Dipendente findByEmailAndPassword(Dipendente dipendente);
 
 }

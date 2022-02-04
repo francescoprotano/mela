@@ -21,9 +21,10 @@ public class Dipendente implements Serializable {
 	private Date data_nascita;
 	private String email;
 	private String password;
-	private String ruolo;
+	private String ruolo_fk;
 	private List<Contratto> contratti = new ArrayList<>();
 	private List<Presenza> presenze = new ArrayList<>();
+
 
 	public int getId_dipendente() {
 		return id_dipendente;
@@ -73,13 +74,6 @@ public class Dipendente implements Serializable {
 		this.password = password;
 	}
 
-	public String getRuolo() {
-		return ruolo;
-	}
-
-	public void setRuolo(String ruolo) {
-		this.ruolo = ruolo;
-	}
 
 	public List<Contratto> getContratti() {
 		return contratti;
@@ -97,11 +91,20 @@ public class Dipendente implements Serializable {
 		this.presenze = presenze;
 	}
 
+
+	public String getRuolo_fk() {
+		return ruolo_fk;
+	}
+
+	public void setRuolo_fk(String ruolo_fk) {
+		this.ruolo_fk = ruolo_fk;
+	}
+
 	@Override
 	public String toString() {
 		return "Dipendente [id_dipendente=" + id_dipendente + ", nome=" + nome + ", cognome=" + cognome
-				+ ", data_nascita=" + data_nascita + ", email=" + email + ", password=" + password + ", ruolo=" + ruolo
-				+ ", contratti=" + contratti + ", presenze=" + presenze + "]";
+				+ ", data_nascita=" + data_nascita + ", email=" + email + ", password=" + password + ", ruolo_fk="
+				+ ruolo_fk + ", contratti=" + contratti + ", presenze=" + presenze + "]";
 	}
 
 	@Override
@@ -116,7 +119,7 @@ public class Dipendente implements Serializable {
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((presenze == null) ? 0 : presenze.hashCode());
-		result = prime * result + ((ruolo == null) ? 0 : ruolo.hashCode());
+		result = prime * result + ((ruolo_fk == null) ? 0 : ruolo_fk.hashCode());
 		return result;
 	}
 
@@ -166,12 +169,19 @@ public class Dipendente implements Serializable {
 				return false;
 		} else if (!presenze.equals(other.presenze))
 			return false;
-		if (ruolo == null) {
-			if (other.ruolo != null)
+		if (ruolo_fk == null) {
+			if (other.ruolo_fk != null)
 				return false;
-		} else if (!ruolo.equals(other.ruolo))
+		} else if (!ruolo_fk.equals(other.ruolo_fk))
 			return false;
 		return true;
 	}
 
+	
+	
+	
+	
+	
+
+	
 }
