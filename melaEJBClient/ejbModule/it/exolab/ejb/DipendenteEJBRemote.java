@@ -14,5 +14,6 @@ public interface DipendenteEJBRemote {
 	Esito findAll();
 	Esito tuttoDelDipendente(String id_dipendente);
 	Esito findByEmailAndPassword(Dipendente dipendente);
+	Esito dipendenteConContrattoAttuale(String id_dipendente);
 
 }

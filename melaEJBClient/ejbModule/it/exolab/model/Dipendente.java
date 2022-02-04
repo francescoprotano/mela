@@ -24,6 +24,7 @@ public class Dipendente implements Serializable {
 	private String ruolo_fk;
 	private List<Contratto> contratti = new ArrayList<>();
 	private List<Presenza> presenze = new ArrayList<>();
+	private Contratto contratto = new Contratto();
 
 
 	public int getId_dipendente() {
@@ -98,13 +99,23 @@ public class Dipendente implements Serializable {
 
 	public void setRuolo_fk(String ruolo_fk) {
 		this.ruolo_fk = ruolo_fk;
+	}	
+
+	public Contratto getContratto() {
+		return contratto;
 	}
+
+	public void setContratto(Contratto contratto) {
+		this.contratto = contratto;
+	}
+
+	
 
 	@Override
 	public String toString() {
 		return "Dipendente [id_dipendente=" + id_dipendente + ", nome=" + nome + ", cognome=" + cognome
 				+ ", data_nascita=" + data_nascita + ", email=" + email + ", password=" + password + ", ruolo_fk="
-				+ ruolo_fk + ", contratti=" + contratti + ", presenze=" + presenze + "]";
+				+ ruolo_fk + ", contratti=" + contratti + ", presenze=" + presenze + ", contratto=" + contratto + "]";
 	}
 
 	@Override

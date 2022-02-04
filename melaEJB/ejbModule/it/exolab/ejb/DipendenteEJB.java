@@ -27,6 +27,13 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 	@Override
 	public Esito add(Dipendente dipendente) {	
 		esito = new Esito();
+		if(!validation.checkNominativo(dipendente.getNome(),dipendente.getCognome())) {
+			esito.setError("Nome o cognome in un formato non valido"); //eventualmente aggiungere una exception nominativo nn valido
+			return esito;
+		}else if(validation.checkEmailAndPassword(dipendente.getEmail(), dipendente.getPassword())) {
+			esito.setError("Email o password non validi. La password deve essere di almeno sei caratteri."); //eventualmente aggiungere una exception emailpassword nn validi
+			return esito;
+		}
 		try {
 		DipendenteDAO.add(dipendente);
 		}catch (EmptyTextException ete) {
@@ -38,13 +45,6 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 			return esito;
 		}
 		
-		if(validation.checkNominativo(dipendente.getNome(),dipendente.getCognome())) {
-			esito.setError("Nome o cognome in un formato non valido"); //eventualmente aggiungere una exception nominativo nn valido
-			return esito;
-		}else if(validation.checkEmailAndPassword(dipendente.getEmail(), dipendente.getPassword())) {
-			esito.setError("Email o password in un formato non valido"); //eventualmente aggiungere una exception emailpassword nn validi
-			return esito;
-		}
 		esito.setSuccess(true);
 		esito.setData(dipendente);
 		return esito;
@@ -92,7 +92,7 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 			esito.setData(DipendenteDAO.findByEmailAndPassword(dipendente));
 		}catch(NotFoundException nfe) {
 			nfe.printStackTrace();
-			esito.setError("Dipendente non ancora registrato" + nfe.getMessage());
+			esito.setError("Dipendente non ancora registrato.  " + nfe.getMessage());
 			return esito;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -102,6 +102,26 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 		esito.setSuccess(true);
 		return esito;
 	}
+
+	@Override
+	public Esito dipendenteConContrattoAttuale(String id_dipendente) {
+		esito = new Esito();
+		try {
+			esito.setData(DipendenteDAO.dipendenteConContrattoAttuale(id_dipendente));
+		}catch(NotFoundException nfe) {
+			nfe.printStackTrace();
+			esito.setError(nfe.getMessage());
+			return esito;
+		}catch(Exception e) {
+			e.printStackTrace();
+			esito.setError("Errore nel dipendenteConContrattoAttuale");
+			return esito;
+		}
+		esito.setSuccess(true);
+		return esito;
+	}
+	
+	
 	
 
 }

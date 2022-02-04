@@ -34,6 +34,7 @@ public class DipendenteController {
 		esito = new Esito();
 		esito = EJBDipendente.findAll();
 		System.out.println(esito.getData().toString());
+		
 		return esito;
 	}
 	
@@ -47,7 +48,6 @@ public class DipendenteController {
 		esito = EJBDipendente.add(dipendente);
 		
 		return esito;
-
 	}
 	
 	@GET
@@ -69,6 +69,18 @@ public class DipendenteController {
 		System.out.println("dentro findByEmailAndPassword");
 		esito = new Esito();
 		esito = EJBDipendente.findByEmailAndPassword(dipendente);
+		
+		return esito;
+	}
+	
+	@GET
+	@Path("dipendenteconcontrattoattuale/{id_dipendente}")
+	public Esito dipendenteConContrattoAttuale(@PathParam("id_dipendente") String id_dipendente) {
+		EJBDipendente = richiamaEJBDipendente.callEJBDipendente();
+		System.out.println("dentro dipendenteConContrattoAttuale");
+		esito = new Esito();
+		esito = EJBDipendente.dipendenteConContrattoAttuale(id_dipendente);
+		System.out.println(esito.getData().toString());
 		
 		return esito;
 	}

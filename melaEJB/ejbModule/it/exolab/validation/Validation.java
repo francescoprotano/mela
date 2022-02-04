@@ -12,6 +12,12 @@ public class Validation {
 		}else return false;
 	}
 	
+	private boolean checkPassword(String password) {
+		if(password.length()>6) {
+			return true;
+		}else return false;
+	}
+	
 	private boolean checkNome(String nome) {
 		if(!nome.matches("^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z._]+(?<![_.])$")){
 			return false;
@@ -24,11 +30,6 @@ public class Validation {
 		}else return true;
 	}
 	
-	private boolean checkPassword(String password) {
-		if(password.length()>6) {
-			return true;
-		}else return false;
-	}
 	
 	
 	

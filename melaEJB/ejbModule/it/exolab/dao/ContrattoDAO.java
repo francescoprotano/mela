@@ -18,5 +18,12 @@ public class ContrattoDAO {
 		
 		return contratti;
 	}
+	
+	public static void add(Contratto contratto) {
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
+		ContrattoMapper mapper = sqlSession.getMapper(ContrattoMapper.class);
+		mapper.add(contratto);
+		sqlSession.commit();
+	}
 
 }

@@ -36,6 +36,12 @@
     JOIN dipendenti d ON c.id_dipendente_fk
     </select>
     
+    
+   <!--  <insert id="add" parameterType="it.exolab.model.Contratto">
+    INSERT INTO contratti (data_assunzione, data_scadenza, tipologia_fk, id_dipendente_fk) 
+    VALUES(#{data_assunzione}, #{data_scadenza), #{tipologia_fk}, #{id_dipendente}
+    </insert> -->
+    
 
    
     </mapper>

@@ -55,4 +55,15 @@ public class DipendenteDAO {
 		return dip;
 	}
 	
+	public static Dipendente dipendenteConContrattoAttuale(String id_dipendente) throws NotFoundException {
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
+		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
+		Dipendente dip = mapper.dipendenteConContrattoAttuale(id_dipendente);
+		if(dip == null) {
+			throw new NotFoundException();
+		}
+		
+		return dip;
+	}
+	
 }

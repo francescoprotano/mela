@@ -10,5 +10,6 @@ public interface DipendenteMapper {
 	List<Dipendente> findAll();
 	Dipendente tuttoDelDipendente(String id_dipendente);
 	Dipendente findByEmailAndPassword(Dipendente dipendente);
+	Dipendente dipendenteConContrattoAttuale(String id_dipendente);
 
 }
