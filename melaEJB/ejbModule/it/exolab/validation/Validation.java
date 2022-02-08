@@ -1,5 +1,6 @@
 package it.exolab.validation;
 
+import it.exolab.exception.EmptyTextException;
 import it.exolab.model.Dipendente;
 
 public class Validation {
@@ -13,7 +14,7 @@ public class Validation {
 	}
 	
 	private boolean checkPassword(String password) {
-		if(password.length()>6) {
+		if(password.length()>6 && password.length()<30) {
 			return true;
 		}else return false;
 	}
@@ -32,7 +33,22 @@ public class Validation {
 	
 	
 	
-	
+	public boolean checkEmptyInput(Dipendente dipendente) throws EmptyTextException{
+		if(dipendente.getCognome().equals("") || dipendente.getNome().equals("") ||
+				dipendente.getEmail().equals("") || dipendente.getPassword().equals("")) {
+			return false;
+		}
+		return true;
+	}
+		
+	public boolean checkNullInput(Dipendente dipendente)  { //throws nullInputException
+		if(dipendente.getCognome() == null || dipendente.getNome() == null ||
+				dipendente.getEmail() == null || dipendente.getPassword() == null) {
+			return false;
+		}
+		return true;
+	}
+		
 	
 	public boolean checkNominativo(String nome, String cognome) {
 		if( checkNome(nome) && checkCognome(cognome)) {

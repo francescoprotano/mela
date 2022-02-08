@@ -8,4 +8,5 @@ public interface ContrattoMapper {
 	
 	void add(Contratto contratto);
 	List<Contratto> findAll();
+	void updateContrattoCorrente(Contratto contratto);
 }

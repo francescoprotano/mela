@@ -10,14 +10,22 @@
     keyProperty="id_contratto"
     keyColumn="id_contratto" 
    >
-    INSERT INTO contratti (data_assunzione, data_scadenza, tipologia_fk)
-    VALUES (#{data_assunzione}, #{data_scadenza})
+    INSERT INTO contratti (data_assunzione, data_scadenza, tipologia_fk, id_dipendente_fk)
+    VALUES (#{data_assunzione}, #{data_scadenza}, #{tipologia_fk}, #{dipendente.id_dipendente})
     </insert>
     
     
     <select id="findAll" resultType="it.exolab.model.Contratto">
     SELECT * FROM contratti
     </select>
+    
+    
+    <update id="updateContrattoCorrente" parameterType="it.exolab.model.Contratto">
+    UPDATE dipendenti
+    SET contratto_corrente_fk = #{id_contratto}
+    WHERE id_dipendente = #{dipendente.id_dipendente}
+    </update>
+    
     
     <resultMap id="findContrattoConDipendente" type="it.exolab.model.Contratto">
     	<result property="id_contratto" column="id_contratto"/>
@@ -35,13 +43,7 @@
     FROM contratti c
     JOIN dipendenti d ON c.id_dipendente_fk
     </select>
-    
-    
-   <!--  <insert id="add" parameterType="it.exolab.model.Contratto">
-    INSERT INTO contratti (data_assunzione, data_scadenza, tipologia_fk, id_dipendente_fk) 
-    VALUES(#{data_assunzione}, #{data_scadenza), #{tipologia_fk}, #{id_dipendente}
-    </insert> -->
-    
+       
 
    
     </mapper>

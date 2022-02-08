@@ -1,6 +1,5 @@
 package it.exolab.ejb;
 
-import java.util.List;
 
 import javax.ejb.Remote;
 
@@ -15,5 +14,6 @@ public interface DipendenteEJBRemote {
 	Esito tuttoDelDipendente(String id_dipendente);
 	Esito findByEmailAndPassword(Dipendente dipendente);
 	Esito dipendenteConContrattoAttuale(String id_dipendente);
+	Esito findById(String id_dipendente);
 
 }

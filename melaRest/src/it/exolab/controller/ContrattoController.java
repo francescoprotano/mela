@@ -1,5 +1,7 @@
 package it.exolab.controller;
 
+import java.sql.Date;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -10,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import it.exolab.dto.Esito;
 import it.exolab.ejb.ContrattoEJBRemote;
 import it.exolab.model.Contratto;
+import it.exolab.model.Dipendente;
 import it.exolab.richiamaejb.RichiamaEJBContratto;
 
 @Path("/contratti")
@@ -34,7 +37,7 @@ public class ContrattoController {
 	
 	@POST
 	@Path("add")
-	public Esito add(Contratto contratto) {
+	public Esito add(Contratto contratto) {		
 		EJBContratto = richiamaEJBContratto.callEJBContratto();
 		System.out.println("Dentro add contratto");
 		esito = new Esito();

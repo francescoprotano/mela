@@ -26,6 +26,13 @@
     SELECT * FROM dipendenti
     </select>
     
+    <select id="findById" resultType="it.exolab.model.Dipendente">
+    SELECT *
+    FROM dipendenti
+    WHERE id_dipendente = #{id_dipendente}
+    </select>
+    
+    
     
     <resultMap id="dipendenteConContrattoEPresenze" type="it.exolab.model.Dipendente">
     	<result property="id_dipendente" column="id_dipendente"/>

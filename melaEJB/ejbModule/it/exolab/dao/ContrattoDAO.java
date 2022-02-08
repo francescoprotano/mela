@@ -24,6 +24,15 @@ public class ContrattoDAO {
 		ContrattoMapper mapper = sqlSession.getMapper(ContrattoMapper.class);
 		mapper.add(contratto);
 		sqlSession.commit();
+		sqlSession.close();
+	}
+	
+	public static void update(Contratto contratto) {
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
+		ContrattoMapper mapper = sqlSession.getMapper(ContrattoMapper.class);
+		mapper.updateContrattoCorrente(contratto);
+		sqlSession.commit();
+		sqlSession.close();
 	}
 
 }

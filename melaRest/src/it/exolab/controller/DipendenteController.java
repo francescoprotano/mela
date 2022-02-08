@@ -1,8 +1,6 @@
 package it.exolab.controller;
 
-import java.util.List;
 
-import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -80,9 +78,21 @@ public class DipendenteController {
 		System.out.println("dentro dipendenteConContrattoAttuale");
 		esito = new Esito();
 		esito = EJBDipendente.dipendenteConContrattoAttuale(id_dipendente);
-		System.out.println(esito.getData().toString());
+
 		
 		return esito;
+	}
+	
+	
+	@GET
+	@Path("findbyid/{id_dipendente}")
+	public Esito findById(@PathParam("id_dipendente") String id_dipendente) {
+		EJBDipendente = richiamaEJBDipendente.callEJBDipendente();
+		System.out.println("Dentro findById");
+		esito = new Esito();
+		esito = EJBDipendente.findById(id_dipendente);
+		
+		return esito;	
 	}
 	
 

@@ -11,5 +11,7 @@ public interface DipendenteMapper {
 	Dipendente tuttoDelDipendente(String id_dipendente);
 	Dipendente findByEmailAndPassword(Dipendente dipendente);
 	Dipendente dipendenteConContrattoAttuale(String id_dipendente);
+	void update(Dipendente dipendente);
+	Dipendente findById(String id_dipendente);
 
 }

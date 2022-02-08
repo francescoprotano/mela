@@ -11,15 +11,14 @@ import it.exolab.model.Dipendente;
 import it.exolab.mybatis.MyBatisUtils;
 
 public class DipendenteDAO {
-
 	
 	public static void add(Dipendente dipendente) throws EmptyTextException {		
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
-		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
+		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);		
 		if(dipendente.getCognome().equals("") || dipendente.getNome().equals("") ||
 				dipendente.getEmail().equals("") || dipendente.getPassword().equals("")) {
 			throw new EmptyTextException();
-		}
+		}		
 		mapper.add(dipendente);
 		sqlSession.commit();
 		sqlSession.close();
@@ -60,10 +59,30 @@ public class DipendenteDAO {
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
 		Dipendente dip = mapper.dipendenteConContrattoAttuale(id_dipendente);
 		if(dip == null) {
-			throw new NotFoundException();
+			throw new NotFoundException("Dipendente senza contratto o ID non presente.");
 		}
 		
 		return dip;
 	}
+	
+	public static Dipendente dipendenteConContrattoAttualeSenzaException(String id_dipendente) {
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
+		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
+		Dipendente dip = mapper.dipendenteConContrattoAttuale(id_dipendente);
+
+		return dip;
+	}
+	
+	public static Dipendente findById(String id_dipendente) throws NotFoundException {
+		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
+		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);
+		Dipendente dip = mapper.findById(id_dipendente);
+		if(dip == null) {
+			throw new NotFoundException("Dipendente non trovato.");
+		}
+		
+		return dip;
+	}
+
 	
 }
