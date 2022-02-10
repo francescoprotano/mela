@@ -1,7 +1,13 @@
 package it.exolab.model;
 
-public class DipendenteMese {
+import java.io.Serializable;
+
+public class DipendenteMese implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4161208081210029808L;
 	private int id_dipendente_fk;
 	private int id_mese_fk;
 	private int stato;

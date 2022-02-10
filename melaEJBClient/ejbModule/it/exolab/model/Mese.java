@@ -1,9 +1,14 @@
 package it.exolab.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Mese {
+public class Mese implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5080300903033161986L;
 	private int id_mese;
 	private Date mese;
 	private boolean chiuso;

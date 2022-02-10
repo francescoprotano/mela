@@ -23,6 +23,7 @@ public class PresenzaEJB implements PresenzaEJBRemote {
     
     
     public Esito add(Presenza presenza) {
+    	esito = new Esito();
     	try {
     		PresenzaDAO.add(presenza);
     		esito.setData(presenza);

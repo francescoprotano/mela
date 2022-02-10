@@ -16,12 +16,19 @@ public class Presenza implements Serializable{
 	private int id_presenza;
 	private Date data;
 	private String motivazione_assenza_fk;
+	private Dipendente dipendente;
 	private Mese mese_fk;
 	private int ore_lavorate;
 	private int ore_assenza;
 	
 	
 
+	public Dipendente getDipendente() {
+		return dipendente;
+	}
+	public void setDipendente(Dipendente dipendente) {
+		this.dipendente = dipendente;
+	}
 	public int getId_presenza() {
 		return id_presenza;
 	}
