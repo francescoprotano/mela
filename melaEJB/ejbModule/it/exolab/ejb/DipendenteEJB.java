@@ -40,13 +40,16 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 			DipendenteDAO.add(dipendente);
 		} catch (EmptyTextException ete) {
 			ete.printStackTrace();
+			esito.setErrCode("201");
 			esito.setError(ete.getMessage());
 		} catch(NullPointerException npe) {
 			npe.printStackTrace();
+			esito.setErrCode("201");
 			esito.setError("Hai compilato i campi?");
 			return esito;
 		} catch (Exception e) {
 			e.printStackTrace();
+			esito.setErrCode("201");
 			esito.setError("Errore nell'insert del dipendente");
 			return esito;
 		}
@@ -62,6 +65,7 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 			esito.setData(DipendenteDAO.findAll());
 		} catch (Exception e) {
 			e.printStackTrace();
+			esito.setErrCode("301");
 			esito.setError("Errore nel findAll dei dipendenti");
 			return esito;
 		}
@@ -80,6 +84,7 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 			return esito;
 		} catch (Exception e) {
 			e.printStackTrace();
+			esito.setErrCode("301");
 			esito.setError("Errore nel tuttoDelDipendente");
 			return esito;
 		}
@@ -99,6 +104,7 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 			return esito;
 		} catch (Exception e) {
 			e.printStackTrace();
+			esito.setErrCode("301");
 			esito.setError("Errore nel findDipendente");
 			return esito;
 		}
@@ -117,6 +123,7 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 			return esito;
 		} catch (Exception e) {
 			e.printStackTrace();
+			esito.setErrCode("301");
 			esito.setError("Errore nel dipendenteConContrattoAttuale");
 			return esito;
 		}
@@ -145,13 +152,16 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 			 //il frontend dunque gestisce
 		} catch(NullPointerException npe){ 
 			esito.setSuccess(true);
+			esito.setErrCode("301");
 			return esito;
 		} catch (NotFoundException nfe) {
 			nfe.printStackTrace();
+			esito.setErrCode("301");
 			esito.setError(nfe.getMessage());
 			return esito;
 		} catch (Exception e) {
 			e.printStackTrace();
+			esito.setErrCode("301");
 			esito.setError("Errore nel findById del dipendente");
 			return esito;
 		}

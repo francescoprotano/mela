@@ -12,6 +12,12 @@
     </select>
     
     
+    <select id="find" resultType="it.exolab.model.Mese">
+    SELECT * FROM mesi
+    WHERE YEAR(mese) = YEAR(#{mese}) AND MONTH(mese) = MONTH(#{mese})
+    </select>
+    
+    
     <update id="updateChiuso" parameterType="it.exolab.model.Mese">
     UPDATE mesi
     SET chiuso = #{chiuso}

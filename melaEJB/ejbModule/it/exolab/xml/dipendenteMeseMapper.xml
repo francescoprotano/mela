@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="it.exolab.mapper.DipendenteMeseMapper">
+    
+  	<insert id="add" parameterType="it.exolab.model.Presenza">
+    INSERT INTO dipendente_mesi (id_dipendente_fk, id_mese_fk)
+    VALUES ( #{id_dipendente_fk.id_dipendente}, #{mese_fk.id_mese})
+    </insert>
+    
+    <select id="find" resultType="it.exolab.model.DipendenteMese" parameterType="it.exolab.model.DipendenteMese">
+    SELECT * FROM dipendente_mesi
+    WHERE id_dipendente_fk = #{id_dipendente_fk} AND id_mese_fk = #{id_mese_fk}
+    AND stato = 0;
+    </select>
+    
+    <update id="updateStato" parameterType="it.exolab.model.Presenza">
+    UPDATE dipendente_mesi
+    SET stato = #{stato}
+    WHERE id_dipendente_fk = #{id_dipendente_fk.id_dipendente} AND id_mese_fk = #{id_mese_fk.id_mese}
+    </update>
+
+   
+    </mapper>

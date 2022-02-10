@@ -11,7 +11,7 @@ import it.exolab.ejb.PresenzaEJBRemote;
 import it.exolab.model.Presenza;
 import it.exolab.richiamaejb.RichiamaEJBPresenza;
 
-@Path("presenze")
+@Path("/presenze")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class PresenzaController {
@@ -20,8 +20,9 @@ public class PresenzaController {
 	Esito esito;
 	
 	@POST
-	@Path("add")
+	@Path("/add")
 	public Esito add(Presenza presenza) {
+		System.out.println("Dentro add presenza");
 		esito = new Esito();
 		presenzaEJB = richiama.doLookupOnEJBRemoteInterface();
 		esito = presenzaEJB.add(presenza);

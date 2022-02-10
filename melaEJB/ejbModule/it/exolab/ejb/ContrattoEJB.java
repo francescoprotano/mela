@@ -23,6 +23,7 @@ public class ContrattoEJB implements ContrattoEJBRemote {
     	}catch(Exception e) {
     		e.printStackTrace();
     		esito.setSuccess(false);
+    		esito.setErrCode("302");
     		esito.setError("Errore nel findAll dei contratti");
     	}
     	esito.setSuccess(true);
@@ -42,6 +43,7 @@ public class ContrattoEJB implements ContrattoEJBRemote {
     		esito.setData(contratto);
     	}catch(Exception e) {
     		e.printStackTrace();
+    		esito.setErrCode("202");
     		esito.setError("Errore nell'add contratto");
     		return esito;
     	}

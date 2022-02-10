@@ -28,5 +28,17 @@ public class MeseDAO {
 		mapper.updateChiuso(mese);
 		sqlSession.commit();
 	}
+	
+	
+	public static Mese find(Mese mese) throws NotFoundException {
+		SqlSession sqlSession =MyBatisUtils.getSqlSessionFactory().openSession();
+		MeseMapper mapper = sqlSession.getMapper(MeseMapper.class);
+		Mese m = mapper.find(mese);
+		if(m == null) {
+			throw new NotFoundException("Mese non trovato");
+		}
+		
+		return m;
+	}
 
 }

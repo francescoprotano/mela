@@ -31,10 +31,12 @@ public class MeseEJB implements MeseEJBRemote {
 		 esito.setSuccess(true);
 		}catch (NotFoundException nfe) {
 			nfe.printStackTrace();
+			esito.setErrCode("303");
 			esito.setError(nfe.getMessage());
 			return esito;
 		}catch(Exception e) {
 			e.printStackTrace();
+			esito.setErrCode("303");
 			esito.setError("Errore nel findAll dei mesi");
 			return esito;
 		}
@@ -51,6 +53,7 @@ public class MeseEJB implements MeseEJBRemote {
 			esito.setSuccess(true);
 		}catch(Exception e) {
 			e.printStackTrace();
+			esito.setErrCode("403");
 			esito.setError("Errore nell'update lo stato del mese da aperto a chiuso, o viceversa");
 			return esito;
 		}

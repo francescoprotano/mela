@@ -5,20 +5,14 @@
     
     <mapper namespace="it.exolab.mapper.PresenzaMapper">
     
-  	<insert id="add" parameterType="it.exolab.model.Presenza"
+  <insert id="add" parameterType="it.exolab.model.Presenza"
     useGeneratedKeys="true"
     keyProperty="id_presenza"
     keyColumn="id_presenza" 
    >
-    INSERT INTO presenze
-    VALUES (#{data}, #{motivazione_assenza_fk}, #{dipendente.id_dipendente_fk}, #{mese.mese_fk}, #{ore_lavorate}, #{ore_assenza})
+    INSERT INTO presenze (data, motivazione_assenza_fk, id_dipendente_fk, mese_fk, ore_lavorate, ore_assenza)
+    VALUES (#{data}, #{motivazione_assenza_fk}, #{id_dipendente_fk.id_dipendente}, #{mese_fk.id_mese}, #{ore_lavorate}, #{ore_assenza})
     </insert>
     
-    
-    <insert id="addDipendente_Mesi" parameterType="">
-    INSERT INTO dipendente_mesi
-    VALUES 
-    </insert>
- 
    
     </mapper>

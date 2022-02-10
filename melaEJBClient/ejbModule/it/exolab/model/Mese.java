@@ -13,6 +13,10 @@ public class Mese implements Serializable{
 	private Date mese;
 	private boolean chiuso;
 	
+	public Mese() {
+		
+	}
+	
 	
 	public int getId_mese() {
 		return id_mese;

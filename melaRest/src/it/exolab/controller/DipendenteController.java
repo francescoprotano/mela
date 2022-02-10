@@ -14,7 +14,7 @@ import it.exolab.ejb.DipendenteEJBRemote;
 import it.exolab.model.Dipendente;
 import it.exolab.richiamaejb.RichiamaEJBDipendente;
 
-@Path("/dipendenti")
+@Path("/admin") //dipendenti
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class DipendenteController {
