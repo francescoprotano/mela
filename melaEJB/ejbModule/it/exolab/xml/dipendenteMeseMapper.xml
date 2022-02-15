@@ -16,10 +16,10 @@
     AND stato = 0;
     </select>
     
-    <update id="updateStato" parameterType="it.exolab.model.Presenza">
+    <update id="updateStato" parameterType="it.exolab.model.DipendenteMese">
     UPDATE dipendente_mesi
     SET stato = #{stato}
-    WHERE id_dipendente_fk = #{id_dipendente_fk.id_dipendente} AND id_mese_fk = #{id_mese_fk.id_mese}
+    WHERE id_dipendente_fk = #{id_dipendente_fk} AND id_mese_fk = #{id_mese_fk}
     </update>
 
    

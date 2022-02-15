@@ -9,5 +9,6 @@ public interface MeseMapper {
 	List<Mese> findAll();
 	void updateChiuso(Mese mese);
 	Mese find(Mese mese);
+	Mese findActualMonth();
 
 }

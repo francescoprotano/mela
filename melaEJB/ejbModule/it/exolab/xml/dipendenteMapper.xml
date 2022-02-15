@@ -21,9 +21,14 @@
     WHERE email = #{email} AND password = #{password}
     </select>
     
+    <select id="findByEmail" resultType="it.exolab.model.Dipendente">
+    SELECT * FROM dipendenti
+    WHERE email = #{email}
+    </select>
+    
     
     <select id="findAll" resultType="it.exolab.model.Dipendente">
-    SELECT * FROM dipendenti
+    SELECT id_dipendente, nome, cognome, data_nascita, email, ruolo_fk, contratto_corrente_fk FROM dipendenti
     </select>
     
     <select id="findById" resultType="it.exolab.model.Dipendente">
@@ -85,11 +90,38 @@
     
      <select id="dipendenteConContrattoAttuale" resultMap="dipendenteConContrattoAttuale">
     SELECT 
-      id_dipendente, nome, cognome, data_nascita, email, password, ruolo_fk,
+      id_dipendente, nome, cognome, data_nascita, email, ruolo_fk,
       id_contratto, data_assunzione, data_scadenza, tipologia_fk
     FROM dipendenti d
     JOIN contratti c ON contratto_corrente_fk = id_contratto
     WHERE id_dipendente = #{id_dipendente}
+     </select>
+     
+     
+     <resultMap id="findPresenzeRelativeAlDipendenteConStatoMeseApertoMap" type="it.exolab.model.Dipendente">
+     <result property="id_dipendente" column="id_dipendente"/>
+     <result property="nome" column="nome"/>
+     <result property="cognome" column="cognome"/>
+     <result property="data_nascita" column="data_nascita"/>
+   	 <result property="email" column="email"/>
+   	 <result property="ruolo_fk" column="ruolo_fk"/>
+     	<association property="presenze" javaType="it.exolab.model.Presenza">
+   			<id property="id_presenza" column="id_presenza"/>
+   			<result property="data" column="data"/>
+   			<result property="motivazione_assenza_fk" column="motivazione_assenza_fk"/>
+   			<result property="ore_lavorate" column="ore_lavorate"/>			
+     	</association>   	
+     </resultMap>
+     
+     
+     <select id="findPresenzeRelativeAlDipendenteConStatoMeseAperto" resultMap="findPresenzeRelativeAlDipendenteConStatoMeseApertoMap">
+     SELECT nome, cognome, data_nascita, email,
+     data, motivazione_assenza_fk,
+     ore_lavorate, ore_assenza
+     FROM dipendenti
+     JOIN presenze ON id_dipendente = id_dipendente_fk
+     JOIN mesi ON id_mese = #{id_mese}
+     WHERE id_dipendente = #{id_dipendente}
      </select>
    
    

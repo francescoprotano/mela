@@ -7,7 +7,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import it.exolab.ejb.ContrattoEJBRemote;
-import it.exolab.ejb.DipendenteEJBRemote;
 
 
 public class RichiamaEJBContratto {

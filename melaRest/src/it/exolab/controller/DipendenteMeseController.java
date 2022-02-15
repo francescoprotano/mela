@@ -25,6 +25,7 @@ public class DipendenteMeseController {
 	public Esito updateStato(DipendenteMese dipendenteMese) {
 		System.out.println("Dentro updateStato");
 		esito = new Esito();
+		System.out.println(dipendenteMese.getId_dipendente_fk()+ " "+ dipendenteMese.getId_mese_fk());
 		EJBDipMese = richiama.lookupOnRemote();
 		esito = EJBDipMese.updateStato(dipendenteMese);
 		

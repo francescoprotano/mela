@@ -3,13 +3,13 @@ package it.exolab.ejb;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.ws.rs.NotFoundException;
 
 import it.exolab.dao.DipendenteMeseDAO;
 import it.exolab.dao.MeseDAO;
 import it.exolab.dao.PresenzaDAO;
 import it.exolab.dto.Esito;
 import it.exolab.exception.FailedInsertException;
+import it.exolab.exception.NotFoundException;
 import it.exolab.model.DipendenteMese;
 import it.exolab.model.Mese;
 import it.exolab.model.Presenza;
@@ -73,7 +73,6 @@ public class PresenzaEJB implements PresenzaEJBRemote {
     		e.printStackTrace();
 			esito.setErrCode("204");
     		esito.setError("Errore nell'add presenza");
-    		return esito;
     	}
     	return esito;
     }

@@ -9,7 +9,9 @@ import it.exolab.dao.DipendenteDAO;
 import it.exolab.dto.Esito;
 import it.exolab.exception.EmptyTextException;
 import it.exolab.exception.NotFoundException;
+import it.exolab.mapper.DipendenteMapper;
 import it.exolab.model.Dipendente;
+import it.exolab.mybatis.MyBatisUtils;
 import it.exolab.validation.Validation;
 
 /**
@@ -27,17 +29,28 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 	@Override
 	public Esito add(Dipendente dipendente) {
 		esito = new Esito();
-		if (!validation.checkNominativo(dipendente.getNome(), dipendente.getCognome())) {
-			esito.setError("Nome o cognome in un formato non valido"); 
-			// eventualmente aggiungere una exception nominativo nn valido
-			return esito;
-		} else if (validation.checkEmailAndPassword(dipendente.getEmail(), dipendente.getPassword())) {
-			esito.setError("Email o password non validi. La password deve essere di almeno sei caratteri."); 
-			// eventualmente aggiungere una exception emailpassword non validi
-			return esito;
-		}
 		try {
+			if(dipendente.getEmail() == null || dipendente.getPassword() == null
+					|| dipendente.getNome() == null || dipendente.getCognome() == null) {
+				throw new EmptyTextException();
+			}
+
+			if (!validation.checkNominativo(dipendente.getNome(), dipendente.getCognome())) {
+				esito.setError("Nome o cognome in un formato non valido"); 
+				// eventualmente aggiungere una exception nominativo nn valido
+				return esito;
+			} else if (!validation.checkPassword(dipendente.getPassword())) {
+				esito.setError("La password deve essere di almeno sei caratteri."); 
+				// eventualmente aggiungere una exception emailpassword non validi
+				return esito;
+			}else if (!validation.checkEmail(dipendente.getEmail())) {
+				esito.setError("Formato email non valido");
+				return esito;
+			}
+
 			DipendenteDAO.add(dipendente);
+			esito.setSuccess(true);
+			esito.setData(dipendente);
 		} catch (EmptyTextException ete) {
 			ete.printStackTrace();
 			esito.setErrCode("201");
@@ -51,10 +64,7 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 			e.printStackTrace();
 			esito.setErrCode("201");
 			esito.setError("Errore nell'insert del dipendente");
-			return esito;
 		}
-		esito.setSuccess(true);
-		esito.setData(dipendente);
 		return esito;
 	}
 
@@ -94,21 +104,27 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 	}
 
 	@Override
-	public Esito findByEmailAndPassword(Dipendente dipendente) {
+	public Esito findByEmailAndPassword(Dipendente dipendente)  {
 		esito = new Esito();
+				
 		try {
-			esito.setData(DipendenteDAO.findByEmailAndPassword(dipendente));
+			Dipendente d = DipendenteDAO.findByEmail(dipendente.getEmail());
+			d = DipendenteDAO.findByEmailAndPassword(dipendente);
+			d.setPassword(null);//occulto la password al frontend
+			esito.setData(d);
+			esito.setSuccess(true);
 		} catch (NotFoundException nfe) {
 			nfe.printStackTrace();
-			esito.setError("Dipendente non ancora registrato.  " + nfe.getMessage());
-			return esito;
+			esito.setError(nfe.getMessage());
+		} catch(NullPointerException npe) {
+			npe.printStackTrace();
+			esito.setErrCode("301");
+			esito.setError("Devi inserire email e password");
 		} catch (Exception e) {
 			e.printStackTrace();
 			esito.setErrCode("301");
 			esito.setError("Errore nel findDipendente");
-			return esito;
 		}
-		esito.setSuccess(true);
 		return esito;
 	}
 
@@ -117,17 +133,15 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 		esito = new Esito();
 		try {
 			esito.setData(DipendenteDAO.dipendenteConContrattoAttuale(id_dipendente));
+			esito.setSuccess(true);
 		} catch (NotFoundException nfe) {
 			nfe.printStackTrace();
 			esito.setError(nfe.getMessage());
-			return esito;
 		} catch (Exception e) {
 			e.printStackTrace();
 			esito.setErrCode("301");
 			esito.setError("Errore nel dipendenteConContrattoAttuale");
-			return esito;
 		}
-		esito.setSuccess(true);
 		return esito;
 	}
 
@@ -167,6 +181,21 @@ public class DipendenteEJB implements DipendenteEJBRemote {
 		}
 		return esito;
 
+	}
+
+	@Override
+	public Esito findPresenzeRelativeAlDipendenteConStatoMeseAperto(int id_dipendente) {
+		esito = new Esito();
+		try {
+
+			Dipendente d = DipendenteDAO.findPresenzeRelativeAlDipendenteConStatoMeseAperto(id_dipendente);
+			esito.setData(d.getPresenze());
+			esito.setSuccess(true);
+		}catch(Exception e) {
+			e.printStackTrace();
+			esito.setError("Errore nel findPresenzeRelativeAlDipendenteConStatoMeseAperto");
+		}
+		return esito;
 	}
 
 }
