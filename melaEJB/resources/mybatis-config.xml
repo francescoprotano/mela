@@ -17,15 +17,12 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="it/exolab/xml/DipendenteMapper.xml" />
-		<mapper resource="it/exolab/xml/ContrattoMapper.xml" />
-		<mapper resource="it/exolab/xml/PresenzaMapper.xml" />
-		<mapper resource="it/exolab/xml/MeseMapper.xml" />
-		<mapper resource="it/exolab/xml/DipendenteMeseMapper.xml" />
+		<mapper resource="it/exolab/xml/dipendenteMapper.xml" />
+		<mapper resource="it/exolab/xml/contrattoMapper.xml" />
+		<mapper resource="it/exolab/xml/presenzaMapper.xml" />
+		<mapper resource="it/exolab/xml/meseMapper.xml" />
+		<mapper resource="it/exolab/xml/dipendenteMeseMapper.xml" />
 		
 		
-
-
-
 	</mappers>
 </configuration>

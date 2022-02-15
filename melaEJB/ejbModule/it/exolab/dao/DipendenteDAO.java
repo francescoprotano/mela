@@ -1,9 +1,6 @@
 package it.exolab.dao;
 
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -100,12 +97,15 @@ public class DipendenteDAO {
 		return dip;
 	}
 	
-	public static Dipendente findPresenzeRelativeAlDipendenteConStatoMeseAperto(int id_dipendente) {
+	public static Dipendente findPresenzeRelativeAlDipendenteConStatoMeseAperto(int id_dipendente) throws NotFoundException {
 		SqlSession sqlSession = MyBatisUtils.getSqlSessionFactory().openSession();
 		DipendenteMapper mapper = sqlSession.getMapper(DipendenteMapper.class);		
 		MeseMapper mapperMese = sqlSession.getMapper(MeseMapper.class);
 		Mese m = new Mese();
 		m = mapperMese.findActualMonth();
+		if(m == null) {
+			throw new NotFoundException();
+		}
 		Dipendente d = new Dipendente();
 		d = mapper.findPresenzeRelativeAlDipendenteConStatoMeseAperto(2, m.getId_mese());
 
